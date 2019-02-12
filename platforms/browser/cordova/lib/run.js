@@ -54,7 +54,8 @@ module.exports.run = function (args) {
             var projectUrl = url.resolve('http://localhost:' + server.port + '/', startPage);
             console.log('startPage = ' + startPage);
             console.log('Static file server running @ ' + projectUrl + '\nCTRL + C to shut down');
-            return server.launchBrowser({'target': args.target, 'url': projectUrl});
+            // return server.launchBrowser({'target': args.target, 'url': projectUrl});
+            
         })
         .catch(function (error) {
             console.log(error.message || error.toString());

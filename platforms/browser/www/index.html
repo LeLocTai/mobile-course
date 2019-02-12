@@ -17,45 +17,46 @@
     <meta name="viewport"
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" type="text/css" href="css/index.css">
-    <title>Hello World</title>
+    <title>Data Entry</title>
 </head>
 <body>
 <h1>Data Entry</h1>
 <form id="form">
     <label>Storage type</label>
-    <select id="storage-type" required>
+    <select name="storage-type" required>
         <option value="home">Home</option>
         <option value="business">Business</option>
     </select>
-    
-    <label>Dimensions</label>
-    <input id="dimensions" type="number" required placeholder="2">m2
-    
+
+    <label>Size</label>
+    <div><input name="size" type="number" required placeholder="2" min="1"><span class="unit">m2</span></div>
+
     <label>Time added</label>
-    <input id="time-added" type="datetime-local" required placeholder="">
-    
+    <input name="time-added" id="time-added" type="datetime-local" required placeholder="">
+
+    <label>Storage features</label>
     <fieldset id="features">
-        <legend>Storage features</legend>
-        <label><input id="features-private" type="checkbox">Private space
-        </label>
-        <label><input id="features-sharing" type="checkbox">Sharing space
-        </label>
-        <label><input id="features-cctv" type="checkbox">CCTV
-        </label>
+        <div><input name="features-private" type="checkbox"><label>Private space</label></div>
+        <div><input name="features-sharing" type="checkbox"><label>Sharing space</label></div>
+        <div><input name="features-cctv" type="checkbox"><label>CCTV</label></div>
     </fieldset>
-    
+
     <label>Rent price</label>
-    <input id="rent-price" type="number" required placeholder="">$/month
-    
+    <div><input name="rent-price" type="number" step="0.01" required placeholder=""><span class="unit">$/month</span></div>
+
     <label>Notes</label>
-    <input id="notes" type="text" placeholder="">
-    
+    <input name="notes" type="text" placeholder="">
+
     <label>Reporter's Name</label>
-    <input id="reporter-name" type="text" required placeholder="">
+    <input name="reporter-name" type="text" required placeholder="">
+    
+    <input type="submit">
 </form>
 
 
 <script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/data-entry.js"></script>
 </body>
 </html>

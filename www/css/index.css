@@ -6,19 +6,45 @@ body {
     -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
     -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
+    padding: 1em;
 }
 
 form {
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: auto 1fr;
     grid-gap: 16px;
 }
 
-label {
-    grid-column: 1 / 2;
+fieldset {
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    grid-gap: 8px;
+}
+
+label,
+fieldset > input {
+    grid-column: 1;
 }
 
 input,
-button {
-    grid-column: 2 / 3;
+button,
+fieldset,
+fieldset > label {
+    grid-column: 2;
+}
+
+.err-msg {
+    grid-column: span 2;
+    margin-top: -1em;
+    color: red;
+    text-align: right;
+}
+
+input[required]::after {
+    content: '*';
+    color: red;
+}
+
+input:invalid {
+    border: thin solid red;
 }
