@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title>Hello World</title>
+</head>
+<body>
+<h1>Data Entry</h1>
+<form id="form">
+    <label>Storage type</label>
+    <select id="storage-type" required>
+        <option value="home">Home</option>
+        <option value="business">Business</option>
+    </select>
+    
+    <label>Dimensions</label>
+    <input id="dimensions" type="number" required placeholder="2">m2
+    
+    <label>Time added</label>
+    <input id="time-added" type="datetime-local" required placeholder="">
+    
+    <fieldset id="features">
+        <legend>Storage features</legend>
+        <label><input id="features-private" type="checkbox">Private space
+        </label>
+        <label><input id="features-sharing" type="checkbox">Sharing space
+        </label>
+        <label><input id="features-cctv" type="checkbox">CCTV
+        </label>
+    </fieldset>
+    
+    <label>Rent price</label>
+    <input id="rent-price" type="number" required placeholder="">$/month
+    
+    <label>Notes</label>
+    <input id="notes" type="text" placeholder="">
+    
+    <label>Reporter's Name</label>
+    <input id="reporter-name" type="text" required placeholder="">
+</form>
+
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>
