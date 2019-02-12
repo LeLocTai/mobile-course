@@ -1,9 +1,9 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "Logbook",
-  "short_name": "Logbook",
-  "version": "io.cordova.hellocordova",
+  "name": "MyStorage",
+  "short_name": "MyStorage",
+  "version": "com.leloctai.mystorage",
   "icons": [],
   "start_url": "index.html"
 }
