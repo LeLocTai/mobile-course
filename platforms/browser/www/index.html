@@ -17,45 +17,84 @@
     <meta name="viewport"
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" type="text/css" href="css/index.css">
-    <title>Hello World</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <title>Data Entry</title>
 </head>
 <body>
 <h1>Data Entry</h1>
 <form id="form">
-    <label>Storage type</label>
-    <select id="storage-type" required>
-        <option value="home">Home</option>
-        <option value="business">Business</option>
-    </select>
-    
-    <label>Dimensions</label>
-    <input id="dimensions" type="number" required placeholder="2">m2
-    
-    <label>Time added</label>
-    <input id="time-added" type="datetime-local" required placeholder="">
-    
-    <fieldset id="features">
-        <legend>Storage features</legend>
-        <label><input id="features-private" type="checkbox">Private space
-        </label>
-        <label><input id="features-sharing" type="checkbox">Sharing space
-        </label>
-        <label><input id="features-cctv" type="checkbox">CCTV
-        </label>
-    </fieldset>
-    
-    <label>Rent price</label>
-    <input id="rent-price" type="number" required placeholder="">$/month
-    
-    <label>Notes</label>
-    <input id="notes" type="text" placeholder="">
-    
-    <label>Reporter's Name</label>
-    <input id="reporter-name" type="text" required placeholder="">
+    <div class="form-group">
+        <label>Storage type</label>
+        <select class="form-control" name="storage-type" required>
+            <option value="home">Home</option>
+            <option value="business">Business</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Size</label>
+        <div class="input-group">
+            <input class="form-control" name="size" type="number" step="0.01" required placeholder="2" min="1">
+            <div class="input-group-append">
+                <span class="input-group-text">m2</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Time added</label>
+        <input class="form-control" name="time-added" id="time-added" type="datetime-local" required placeholder="">
+    </div>
+
+    <div class="form-group">
+        <label>Storage features</label>
+        <fieldset id="features">
+            <div class="form-check">
+                <input class="form-check-input" name="features-private" type="checkbox">
+                <label class="form-check-label">Private space</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" name="features-sharing" type="checkbox">
+                <label class="form-check-label">Sharing space</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" name="features-cctv" type="checkbox">
+                <label class="form-check-label">CCTV</label>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="form-group">
+        <label>Rent price</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+            </div>
+            <input class="form-control" name="rent-price" type="number" step="0.01" required placeholder="">
+            <div class="input-group-append">
+                <span class="input-group-text">/month</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Notes</label>
+        <textarea class="form-control" name="notes" maxlength="5000"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Reporter's Name</label>
+        <input class="form-control" name="reporter-name" type="text" required placeholder="">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 
 <script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/data-entry.js"></script>
 </body>
 </html>

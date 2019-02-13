@@ -6,19 +6,13 @@ body {
     -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
     -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
+    padding: 1em;
 }
 
-form {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    grid-gap: 16px;
+label{
+    font-weight: bold;
 }
 
-label {
-    grid-column: 1 / 2;
-}
-
-input,
-button {
-    grid-column: 2 / 3;
+label.form-check-label{
+    font-weight: inherit;
 }

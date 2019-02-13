@@ -6,16 +6,13 @@ body {
     -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
     -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
+    padding: 1em;
 }
 
-/* Portrait layout (default) */
-.app {
-    
+label{
+    font-weight: bold;
 }
 
-/* Landscape layout (with min-width) */
-@media screen and (min-aspect-ratio: 1/1) and (min-width: 400px) {
-    .app {
-        
-    }
+label.form-check-label{
+    font-weight: inherit;
 }
