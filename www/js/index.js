@@ -20,12 +20,9 @@ var app = {
     },
 
     prepareTables: function (db) {
-        db.transaction(
-            execSql,
-            error => console.log(error)
-        );
+        db.transaction(handleTransaction, error => console.log(error));
 
-        function execSql(tx) {
+        function handleTransaction(tx) {
             // language=SQLite
             tx.executeSql(`CREATE TABLE IF NOT EXISTS StorageTypes
                            (
