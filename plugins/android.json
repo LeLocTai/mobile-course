@@ -10,10 +10,10 @@
     "cordova-plugin-dialogs": {
       "PACKAGE_NAME": "com.leloctai.mystorage"
     },
-    "cordova-plugin-vibration": {
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.leloctai.mystorage"
     },
-    "cordova-plugin-whitelist": {
+    "cordova-plugin-vibration": {
       "PACKAGE_NAME": "com.leloctai.mystorage"
     }
   },
