@@ -8,11 +8,3 @@ body {
     -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
     padding: 1em;
 }
-
-label{
-    font-weight: bold;
-}
-
-label.form-check-label{
-    font-weight: inherit;
-}
