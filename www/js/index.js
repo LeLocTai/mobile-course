@@ -51,11 +51,11 @@ var app = {
             tx.executeSql(`CREATE TABLE IF NOT EXISTS Storage_StorageFeatures
                            (
                              Storage_Id         INTEGER NOT NULL,
-                             StorageFeatures_Id INTEGER NOT NULL,
+                             StorageFeature_Id INTEGER NOT NULL,
                              PRIMARY KEY (Storage_Id,
-                                          StorageFeatures_Id),
+                                          StorageFeature_Id),
                              FOREIGN KEY (Storage_Id) REFERENCES Storages (Id),
-                             FOREIGN KEY (StorageFeatures_Id) REFERENCES StorageFeatures (Id)
+                             FOREIGN KEY (StorageFeature_Id) REFERENCES StorageFeatures (Id)
                            )`);
         }
     },
