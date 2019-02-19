@@ -1,36 +1,3 @@
-const sql_createTables = `
-  CREATE TABLE Storage_StorageFeatures
-  (
-    Storage_Id         INTEGER NOT NULL,
-    StorageFeatures_Id INTEGER NOT NULL,
-    PRIMARY KEY (Storage_Id,
-                 StorageFeatures_Id),
-    FOREIGN KEY (Storage_Id) REFERENCES Storages (Id),
-    FOREIGN KEY (StorageFeatures_Id) REFERENCES StorageFeatures (Id)
-  );
-  CREATE TABLE StorageFeatures
-  (
-    Id   INTEGER      NOT NULL PRIMARY KEY AUTOINCREMENT,
-    Name TEXT NOT NULL
-  );
-  CREATE TABLE Storages
-  (
-    Id             INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
-    StorageType_Id INTEGER  NOT NULL,
-    "size"         REAL     NOT NULL,
-    datetime_added TEXT NOT NULL,
-    rent_price     REAL     NOT NULL,
-    notes          TEXT,
-    reporter_name  TEXT NOT NULL,
-    FOREIGN KEY (StorageType_Id) REFERENCES StorageTypes (Id)
-  );
-  CREATE TABLE StorageTypes
-  (
-    Id   INTEGER      NOT NULL PRIMARY KEY AUTOINCREMENT,
-    Name TEXT NOT NULL
-  );
-`;
-
 var app = {
     db: null,
     // Application Constructor
@@ -39,20 +6,62 @@ var app = {
     },
 
     onDeviceReady: function () {
-        function prepareDb() {
-            this.db = window.openDatabase("mystoragedb", "1.0", "Storages DB", 2 * 1024 * 1024);
+        this.db = this.openDb();
+        this.prepareTables(this.db);
+    },
 
-            this.db.transaction((tx) => {
-                tx.executeSql(sql_createTables, null, function (tx, result) {
-                    console.log(result);
-                }, function (tx, error) {
-                    console.log(error);
-                });
-            })
+    openDb: function () {
+        return window.openDatabase(
+            "mystoragedb",
+            "1.0",
+            "Storages DB",
+            4 * 1024 * 1024
+        );
+    },
+
+    prepareTables: function (db) {
+        db.transaction(handleTransaction, error => console.log(error));
+
+        function handleTransaction(tx) {
+            // language=SQLite
+            tx.executeSql(`CREATE TABLE IF NOT EXISTS StorageTypes
+                           (
+                             Id   INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                             Name TEXT    NOT NULL
+                           )`);
+            // language=SQLite
+            tx.executeSql(`CREATE TABLE IF NOT EXISTS Storages
+                           (
+                             Id             INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                             StorageType_Id INTEGER NOT NULL,
+                             "size"         REAL    NOT NULL,
+                             datetime_added TEXT    NOT NULL,
+                             rent_price     REAL    NOT NULL,
+                             notes          TEXT,
+                             reporter_name  TEXT    NOT NULL,
+                             FOREIGN KEY (StorageType_Id) REFERENCES StorageTypes (Id)
+                           )`);
+            // language=SQLite
+            tx.executeSql(`CREATE TABLE IF NOT EXISTS StorageFeatures
+                           (
+                             Id   INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                             Name TEXT    NOT NULL
+                           )`);
+            // language=SQLite
+            tx.executeSql(`CREATE TABLE IF NOT EXISTS Storage_StorageFeatures
+                           (
+                             Storage_Id         INTEGER NOT NULL,
+                             StorageFeature_Id INTEGER NOT NULL,
+                             PRIMARY KEY (Storage_Id,
+                                          StorageFeature_Id),
+                             FOREIGN KEY (Storage_Id) REFERENCES Storages (Id),
+                             FOREIGN KEY (StorageFeature_Id) REFERENCES StorageFeatures (Id)
+                           )`);
         }
-
-        prepareDb();
-    }
+    },
 };
+$( document ).on( "mobileinit", function() {	
+	$.mobile.defaultPageTransition = "slide"
+});
 
 app.initialize();

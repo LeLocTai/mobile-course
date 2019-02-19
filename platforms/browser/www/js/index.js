@@ -1,18 +1,3 @@
-// language=SQLite
-const sql_createTables = `
-  CREATE TABLE Storages
-  (
-    Id             INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    StorageType_Id INTEGER NOT NULL,
-    "size"         REAL    NOT NULL,
-    datetime_added TEXT    NOT NULL,
-    rent_price     REAL    NOT NULL,
-    notes          TEXT,
-    reporter_name  TEXT    NOT NULL,
-    FOREIGN KEY (StorageType_Id) REFERENCES StorageTypes (Id)
-  );
-`;
-
 var app = {
     db: null,
     // Application Constructor
@@ -35,12 +20,9 @@ var app = {
     },
 
     prepareTables: function (db) {
-        db.transaction(
-            execSql,
-            error => console.log(error)
-        );
+        db.transaction(handleTransaction, error => console.log(error));
 
-        function execSql(tx) {
+        function handleTransaction(tx) {
             // language=SQLite
             tx.executeSql(`CREATE TABLE IF NOT EXISTS StorageTypes
                            (
@@ -69,14 +51,17 @@ var app = {
             tx.executeSql(`CREATE TABLE IF NOT EXISTS Storage_StorageFeatures
                            (
                              Storage_Id         INTEGER NOT NULL,
-                             StorageFeatures_Id INTEGER NOT NULL,
+                             StorageFeature_Id INTEGER NOT NULL,
                              PRIMARY KEY (Storage_Id,
-                                          StorageFeatures_Id),
+                                          StorageFeature_Id),
                              FOREIGN KEY (Storage_Id) REFERENCES Storages (Id),
-                             FOREIGN KEY (StorageFeatures_Id) REFERENCES StorageFeatures (Id)
+                             FOREIGN KEY (StorageFeature_Id) REFERENCES StorageFeatures (Id)
                            )`);
         }
     },
 };
+$( document ).on( "mobileinit", function() {	
+	$.mobile.defaultPageTransition = "slide"
+});
 
 app.initialize();
