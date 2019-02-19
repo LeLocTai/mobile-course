@@ -10,10 +10,10 @@ function onDeviceReady() {
 
     function onDialogConfirmed(index) {
         switch (index) {
-            case 0:
-                navigator.notification.beep(3);
-                break;
             case 1:
+                navigator.notification.beep(1);
+                break;
+            case 2:
                 navigator.vibrate(1000);
                 break;
         }

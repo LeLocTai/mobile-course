@@ -61,7 +61,8 @@ var app = {
     },
 };
 $( document ).on( "mobileinit", function() {	
-	$.mobile.defaultPageTransition = "slide"
+	$.mobile.defaultPageTransition = "slide";
+	$.mobile.phonegapNavigationEnabled = true;
 });
 
 app.initialize();
