@@ -9,4 +9,42 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/label_margin_top"
+            android:gravity="bottom"
+            android:text="Storage Type"
+            android:textSize="@dimen/form_label_size"
+            android:textStyle="bold"/>
+
+        <Spinner
+            android:id="@+id/input_storage_type"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/form_control_height"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/label_margin_top"
+            android:gravity="bottom"
+            android:text="Size (m2)"
+            android:textSize="@dimen/form_label_size"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"/>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,4 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="form_control_height">48dp</dimen>
+    <dimen name="form_label_size">20sp</dimen>
+    <dimen name="label_margin_top">16dp</dimen>
 </resources>
