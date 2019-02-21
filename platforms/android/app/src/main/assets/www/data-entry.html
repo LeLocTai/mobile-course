@@ -3,67 +3,69 @@
 
 <head>
     <title>Data Entry</title>
-    <script type="text/javascript" src="js/data-entry.js"></script>
 </head>
 
 <body>
-    <div data-role="page" data-add-back-btn="true">
-        <div data-role="header" data-position="fixed" data-add-back-btn="true">
-            <h1>Data Entry</h1>
-        </div>
-        <div role="main" class="ui-content">
-            <form id="form">
-                <div data-role="fieldcontain">
-                    <label for="storage-type" class="select">Storage Type</label>
-                    <select id="storage-type" name="storage-type" required>
-                        <option value="home">Home</option>
-                        <option value="business">Business</option>
-                    </select>
-                </div>
-
-                <div data-role="fieldcontain">
-                    <label for="size">Size (m2)</label>
-                    <input type="number" step="0.01" min="0" name="size" id="size" value="" required/>
-                </div>
-
-                <div data-role="fieldcontain">
-                    <label for="time-added">Time added</label>
-                    <input type="datetime-local" name="time-added" id="time-added" value="" required/>
-                </div>
-
-                <fieldset data-role="controlgroup">
-
-                    <legend>Storage features</legend>
-
-                    <input type="checkbox" name="features-private" id="features-private">
-                    <label for="features-private">Private space</label>
-
-                    <input type="checkbox" name="features-sharing" id="features-sharing">
-                    <label for="features-sharing">Sharing space</label>
-
-                    <input type="checkbox" name="features-cctv" id="features-cctv">
-                    <label for="features-cctv">CCTV</label>
-                </fieldset>
-
-                <div data-role="fieldcontain">
-                    <label for="rent-price">Rent price ($/month)</label>
-                    <input type="number" step="0.01" min="0" name="rent-price" id="rent-price" value="" required/>
-                </div>
-
-                <div data-role="fieldcontain">
-                    <label for="notes">Notes</label>
-                    <textarea cols="40" rows="8" name="notes" id="notes" maxlength="5000"></textarea>
-                </div>
-
-                <div data-role="fieldcontain">
-                    <label for="reporter-name">Reporter's Name</label>
-                    <input type="text" name="reporter-name" id="reporter-name" value="" required/>
-                </div>
-
-                <button type="submit">Submit</button>
-            </form>
-        </div>
+<div data-role="page" data-add-back-btn="true">
+    <div data-role="header" data-position="fixed" data-add-back-btn="true">
+        <h1>Data Entry</h1>
     </div>
+    <div role="main" class="ui-content">
+        <form id="form">
+            <div data-role="fieldcontain">
+                <label for="storage-type" class="select">Storage Type</label>
+                <select id="storage-type" name="storage-type" required>
+                    <option value="home">Home</option>
+                    <option value="business">Business</option>
+                </select>
+            </div>
+
+            <div data-role="fieldcontain">
+                <label for="size">Size (m2)</label>
+                <input type="number" step="0.01" min="0" name="size" id="size" value="" required/>
+            </div>
+
+            <div data-role="fieldcontain">
+                <label for="time-added">Time added</label>
+                <input type="datetime-local" name="time-added" id="time-added" value="" required/>
+            </div>
+
+            <fieldset data-role="controlgroup">
+
+                <legend>Storage features</legend>
+
+                <input type="checkbox" name="features-private" id="features-private">
+                <label for="features-private">Private space</label>
+
+                <input type="checkbox" name="features-sharing" id="features-sharing">
+                <label for="features-sharing">Sharing space</label>
+
+                <input type="checkbox" name="features-cctv" id="features-cctv">
+                <label for="features-cctv">CCTV</label>
+            </fieldset>
+
+            <div data-role="fieldcontain">
+                <label for="rent-price">Rent price ($/month)</label>
+                <input type="number" step="0.01" min="0" name="rent-price" id="rent-price" value="" required/>
+            </div>
+
+            <div data-role="fieldcontain">
+                <label for="notes">Notes</label>
+                <textarea cols="40" rows="8" name="notes" id="notes" maxlength="5000"></textarea>
+            </div>
+
+            <div data-role="fieldcontain">
+                <label for="reporter-name">Reporter's Name</label>
+                <input type="text" name="reporter-name" id="reporter-name" value="" required/>
+            </div>
+
+            <button class="ui-btn">Submit</button>
+        </form>
+
+
+        <script type="text/javascript" src="js/data-entry.js"></script>
+    </div>
+</div>
 </body>
 
 </html>

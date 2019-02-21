@@ -10,11 +10,28 @@ body {
     /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;
     /* prevent copy paste, to allow, change 'none' to 'text' */
-    padding: 1em;
 }
 
-.in,
-.out {
-    -webkit-animation-timing-function: ease-in-out;
-    -webkit-animation-duration: 200ms !important;
+@keyframes slideinfromleft {
+    from {
+        transform: translateX(-50%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideouttoleft {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(-50%);
+        opacity: 0;
+    }
 }
