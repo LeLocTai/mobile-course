@@ -7,5 +7,7 @@
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jqm" level="project" />
+    <orderEntry type="library" name="jquery mobile" level="project" />
+    <orderEntry type="library" name="jquery.slim.d.ts" level="project" />
   </component>
 </module>

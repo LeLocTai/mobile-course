@@ -1,5 +1,6 @@
 package com.letai.mystorage;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -11,6 +12,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
@@ -25,6 +28,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        prepareSpinner();
+        prepareDateTimePicker();
+    }
+
+    private void prepareSpinner()
+    {
         Spinner storageTypeSpinner = findViewById(R.id.input_storage_type);
 
         storageTypeSpinner.setOnItemSelectedListener(this);
@@ -40,6 +49,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         storageTypeSpinner.setAdapter(adapter);
+    }
+
+    private void prepareDateTimePicker()
+    {
+        EditText datePicker = findViewById(R.id.input_date);
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener()
+        {
+            @Override
+            public void onDateSet(DatePicker datePicker, int y, int m, int d)
+            {
+
+            }
+        };
     }
 
     @Override

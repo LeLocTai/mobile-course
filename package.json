@@ -10,6 +10,8 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "dependencies": {
+    "@types/jquery": "^3.3.29",
+    "@types/jquerymobile": "^1.4.30",
     "cordova-android": "^7.1.4",
     "cordova-browser": "^5.0.4",
     "cordova-plugin-dialogs": "^2.0.1",
