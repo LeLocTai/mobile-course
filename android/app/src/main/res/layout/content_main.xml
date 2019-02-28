@@ -95,30 +95,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:orientation="vertical">
 
             <CheckBox
                 android:id="@+id/checkBox_privateSpace"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:text="Private space"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <CheckBox
                 android:id="@+id/checkBox_sharingSpace"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:text="Sharing space"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <CheckBox
                 android:id="@+id/checkBox_cctv"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:text="CCTV"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
         <TextView
@@ -167,8 +165,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/errorText"

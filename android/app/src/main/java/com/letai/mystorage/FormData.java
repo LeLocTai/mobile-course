@@ -1,5 +1,7 @@
 package com.letai.mystorage;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Date;
 
 /**
@@ -30,7 +32,10 @@ public class FormData {
     }
 
     private float tryParseFloat(String s, String name) {
-        if(s.ise)
+        if (StringUtils.isBlank(s)) {
+            addError(name + " is required");
+            return 0;
+        }
         try {
             return Float.parseFloat(s);
         } catch (NullPointerException e) {
@@ -73,35 +78,36 @@ public class FormData {
     }
 
     private String getSizeError() {
-
         String err = null;
+
+        if (size <= 0)
+            err = "Size must be greater than 0";
 
         return err;
     }
 
     private String getDatetimeError() {
-
         String err = null;
 
         return err;
     }
 
     private String getRentPriceError() {
-
         String err = null;
+
+        if (rentPrice <= 0)
+            err = "Rent Price must be greater than 0";
 
         return err;
     }
 
     private String getNotesError() {
-
         String err = null;
 
         return err;
     }
 
     private String getReporterNameError() {
-
         String err = null;
 
         return err;
