@@ -5,22 +5,22 @@ import java.util.Date;
 /**
  * Created by Le Loc Tai on 2/28/2019.
  */
-public class FormData
-{
+public class FormData {
     private String storageType;
-    private float  size;
-    private Date   datetime;
-    private float  rentPrice;
+    private float size;
+    private Date datetime;
+    private float rentPrice;
     private String notes;
     private String reporterName;
 
 
     private StringBuilder errorStringBuilder;
-    private int           errorCount;
+    private int errorCount;
 
 
-    public FormData(String storageType, String size, Date datetime, String rentPrice, String notes, String reporterName)
-    {
+    public FormData(String storageType, String size, Date datetime, String rentPrice, String notes, String reporterName) {
+        errorStringBuilder = new StringBuilder();
+
         this.storageType = storageType;
         this.size = tryParseFloat(size, "Size");
         this.datetime = datetime;
@@ -29,28 +29,19 @@ public class FormData
         this.reporterName = reporterName;
     }
 
-    private float tryParseFloat(String s, String name)
-    {
-        try
-        {
+    private float tryParseFloat(String s, String name) {
+        if(s.ise)
+        try {
             return Float.parseFloat(s);
-        }
-        catch (NumberFormatException e)
-        {
-            addError(name + " is not a number");
-            return 0;
-        }
-        catch (NullPointerException e)
-        {
+        } catch (NullPointerException e) {
             addError(name + " is required");
-            return 0;
+        } catch (NumberFormatException e) {
+            addError(name + " is not a number");
         }
+        return 0;
     }
 
-    public String getErrors()
-    {
-        errorStringBuilder = new StringBuilder();
-
+    public String getErrors() {
         addError(getStorageTypeError());
         addError(getSizeError());
         addError(getDatetimeError());
@@ -61,15 +52,12 @@ public class FormData
         return errorStringBuilder.toString();
     }
 
-    private void addError(String err)
-    {
-        if (err == null)
-        {
+    private void addError(String err) {
+        if (err == null) {
             return;
         }
 
-        if (errorCount > 0)
-        {
+        if (errorCount > 0) {
             errorStringBuilder.append("\n");
         }
 
@@ -77,48 +65,42 @@ public class FormData
         errorCount++;
     }
 
-    private String getStorageTypeError()
-    {
+    private String getStorageTypeError() {
 
         String err = null;
 
         return err;
     }
 
-    private String getSizeError()
-    {
+    private String getSizeError() {
 
         String err = null;
 
         return err;
     }
 
-    private String getDatetimeError()
-    {
+    private String getDatetimeError() {
 
         String err = null;
 
         return err;
     }
 
-    private String getRentPriceError()
-    {
+    private String getRentPriceError() {
 
         String err = null;
 
         return err;
     }
 
-    private String getNotesError()
-    {
+    private String getNotesError() {
 
         String err = null;
 
         return err;
     }
 
-    private String getReporterNameError()
-    {
+    private String getReporterNameError() {
 
         String err = null;
 
