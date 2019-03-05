@@ -89,6 +89,9 @@ public class FormData {
     private String getDatetimeError() {
         String err = null;
 
+        if(datetime == null)
+            err = "Date and Time is required";
+
         return err;
     }
 
@@ -109,6 +112,9 @@ public class FormData {
 
     private String getReporterNameError() {
         String err = null;
+
+        if(StringUtils.isBlank(reporterName))
+            err = "Reporter's Name is required";
 
         return err;
     }
