@@ -7,8 +7,6 @@ const app = {
 
     onDeviceReady: function () {
         dbmanager.initialize();
-        this.storageListView = $('#storage-list');
-        this.updateStorageList();
     },
 
     updateStorageList: function () {
@@ -24,6 +22,7 @@ const app = {
         )));
 
         this.storageListView.listview('refresh');
+        console.log('List updated');
     },
 
     getStorageListItem: function (id, type, size, price, note, reporterName) {
@@ -50,7 +49,8 @@ $(document).on("mobileinit", function () {
 });
 
 $(document).on( "pagecreate", function() {
-    
+    app.storageListView = $('#storage-list');
+    app.updateStorageList();
 });
 
 app.initialize();
