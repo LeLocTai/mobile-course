@@ -21,19 +21,39 @@ const dbmanager = {
     },
 
     saveFormData: function (formData) {
+        console.log(formData);
         this.db.transaction(tx => {
-            tx.executeSql(`
-INSERT INTO ${Table.Storages} (StorageType_Name, "size", datetime_added, rent_price, notes, reporter_name)
-VALUES (
-        (SELECT name FROM ${Table.StorageTypes} WHERE name='${formData.storageTypes}'),
-        ${formData.size},
-        '${formData.timeAdded}',
-        ${formData.rentPrice},
-        '${formData.notes}',
-        '${formData.reporterName}'
-       )`
+            saveStorageFields(tx);
+        }, console.error);
+
+        function saveStorageFields(tx) {
+            tx.executeSql(
+                `INSERT INTO ${Table.Storages} (StorageType_Name, "size", datetime_added, rent_price, notes, reporter_name)
+                     VALUES (?, ?, ?, ?, ?, ?)`
+                , [
+                    formData.storageType,
+                    formData.size,
+                    formData.timeAdded,
+                    formData.rentPrice,
+                    formData.notes,
+                    formData.reporterName
+                ], (tx, rs) => {
+                    saveFeatures(tx, rs.insertId)
+                }
             );
-        }, console.error)
+        }
+
+        function saveFeatures(tx, storageId) {
+            formData.features.forEach(featureName => {
+                tx.executeSql(
+                    `INSERT INTO ${Table.Storage_StorageFeatures} (Storage_Id, StorageFeatures_Name) VALUES (?, ?)`
+                    , [
+                        storageId,
+                        featureName
+                    ]
+                );
+            })
+        }
     },
 
     fillData: function (db) {
@@ -43,7 +63,10 @@ VALUES (
                                      ('${StorageFeature.PrivateSpace}'),
                                      ('${StorageFeature.SharingSpace}'),
                                      ('${StorageFeature.CCTV}')`);
-        }, console.error)
+        }, error => {
+            if (error.code !== 6)
+                console.error(error)
+        })
     },
 
     openDb: function () {

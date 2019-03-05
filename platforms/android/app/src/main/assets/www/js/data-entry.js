@@ -1,5 +1,5 @@
 const formDataTemplate = {
-    storageTypes: null,
+    storageType: null,
     size: null,
     timeAdded: null,
     features: [],
@@ -19,7 +19,7 @@ form.submit(e => {
 
     rawData.forEach(entry => {
         if (entry.value === 'on' && StorageFeature.hasOwnProperty(entry.name)) {
-            formData.features.push(entry.name);
+            formData.features.push(StorageFeature[entry.name]);
         } else {
             formData[entry.name] = entry.value;
         }
