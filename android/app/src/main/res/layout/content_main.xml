@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -26,13 +25,12 @@
             android:gravity="bottom"
             android:text="Storage Type"
             android:textSize="@dimen/form_label_size"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/input_storage_type"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/form_control_height"/>
+            android:layout_height="@dimen/form_control_height" />
 
         <TextView
             android:layout_width="match_parent"
@@ -41,14 +39,14 @@
             android:gravity="bottom"
             android:text="Size (m2)"
             android:textSize="@dimen/form_label_size"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/input_size"
             android:layout_width="match_parent"
             android:layout_height="@dimen/form_control_height"
             android:ems="10"
-            android:inputType="numberDecimal"/>
+            android:inputType="numberDecimal" />
 
 
         <TextView
@@ -58,7 +56,7 @@
             android:gravity="bottom"
             android:text="Time added"
             android:textSize="@dimen/form_label_size"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,7 +71,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:focusable="false"
-                android:inputType="date"/>
+                android:inputType="date" />
 
             <EditText
                 android:id="@+id/input_time"
@@ -82,7 +80,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:focusable="false"
-                android:inputType="time"/>
+                android:inputType="time" />
         </LinearLayout>
 
         <TextView
@@ -92,35 +90,33 @@
             android:gravity="bottom"
             android:text="Features"
             android:textSize="@dimen/form_label_size"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:orientation="vertical">
 
             <CheckBox
                 android:id="@+id/checkBox_privateSpace"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:text="Private space"
-                android:textSize="16sp"/>
+                android:textSize="18sp" />
 
             <CheckBox
                 android:id="@+id/checkBox_sharingSpace"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:text="Sharing space"
-                android:textSize="16sp"/>
+                android:textSize="18sp" />
 
             <CheckBox
                 android:id="@+id/checkBox_cctv"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:text="CCTV"
-                android:textSize="16sp"/>
+                android:textSize="18sp" />
         </LinearLayout>
 
         <TextView
@@ -130,14 +126,14 @@
             android:gravity="bottom"
             android:text="Rent Price ($/month)"
             android:textSize="@dimen/form_label_size"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/input_rent_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="numberDecimal"/>
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="match_parent"
@@ -146,14 +142,14 @@
             android:gravity="bottom"
             android:text="Notes (optional)"
             android:textSize="@dimen/form_label_size"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/input_notes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textMultiLine"/>
+            android:inputType="textMultiLine" />
 
         <TextView
             android:layout_width="match_parent"
@@ -162,15 +158,14 @@
             android:gravity="bottom"
             android:text="Reporter's Name"
             android:textSize="@dimen/form_label_size"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/input_reporter_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name"/>
+            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/errorText"
@@ -180,15 +175,15 @@
             android:gravity="bottom"
             android:text="Error!!!"
             android:textColor="#D50000"
-            android:textSize="@dimen/form_label_size"/>
+            android:textSize="@dimen/form_label_size" />
 
         <Button
             android:id="@+id/button_submit"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Submit"/>
+            android:layout_marginTop="8dp"
+            android:text="Submit" />
     </LinearLayout>
 
 </ScrollView>
