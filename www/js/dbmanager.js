@@ -20,46 +20,105 @@ const dbmanager = {
         this.fillData(this.db);
     },
 
-    saveFormData: function (formData) {
-        console.log(formData);
-        this.db.transaction(tx => {
-            saveStorageFields(tx);
-        }, console.error);
+    saveFormData: async function (formData) {
+        return new Promise(resolve => {
+            console.log(formData);
+            this.db.transaction(async tx => {
+                await saveStorageFields(tx);
+                resolve();
+            }, console.error);
+        });
 
-        function saveStorageFields(tx) {
-            tx.executeSql(
-                `INSERT INTO ${Table.Storages} (StorageType_Name, "size", datetime_added, rent_price, notes, reporter_name)
-                     VALUES (?, ?, ?, ?, ?, ?)`
-                , [
-                    formData.storageType,
-                    formData.size,
-                    formData.timeAdded,
-                    formData.rentPrice,
-                    formData.notes,
-                    formData.reporterName
-                ], (tx, rs) => {
-                    saveFeatures(tx, rs.insertId)
-                }
-            );
-        }
-
-        function saveFeatures(tx, storageId) {
-            formData.features.forEach(featureName => {
+        async function saveStorageFields(tx) {
+            return new Promise(resolve => {
                 tx.executeSql(
-                    `INSERT INTO ${Table.Storage_StorageFeatures} (Storage_Id, StorageFeatures_Name) VALUES (?, ?)`
+                    `INSERT INTO ${Table.Storages} (StorageType_Name, "size", datetime_added, rent_price, notes, reporter_name) VALUES (?, ?, ?, ?, ?, ?)`
                     , [
-                        storageId,
-                        featureName
-                    ]
+                        formData.storageType,
+                        formData.size,
+                        formData.timeAdded,
+                        formData.rentPrice,
+                        formData.notes,
+                        formData.reporterName
+                    ], async (tx, rs) => {
+                        await saveFeatures(tx, rs.insertId);
+                        resolve();
+                    }
                 );
             })
         }
-    },
-    
-    getAllStorage: function(){
-        this.db.transaction(tx => {
+
+        async function saveFeatures(tx, storageId) {
+            let promises = [];
             
-        }, console.error)
+            formData.features.forEach(featureName => {
+                let promise = new Promise(resolve => {
+                    tx.executeSql(
+                        `INSERT INTO ${Table.Storage_StorageFeatures} (Storage_Id, StorageFeatures_Name) VALUES (?, ?)`
+                        , [
+                            storageId,
+                            featureName
+                        ], (tx, rs) => {
+                            resolve();
+                        }
+                    );
+                });
+                promises.push(promise);
+            });
+            
+            return Promise.all(promises);
+        }
+    },
+
+    getAllStorages: async function () {
+        return new Promise(resolve => {
+
+            dbmanager.db.transaction(
+                tx => tx.executeSql("SELECT * FROM " + Table.Storages, [], async (tx, rs) => {
+                    resolve(await extractData(tx, rs));
+                }),
+                console.error
+            );
+
+            async function extractData(tx, rs) {
+                let storageList = [];
+
+                for (let row of rs.rows) {
+                    let storage = Object.assign({}, formDataTemplate);
+
+                    storage.id = row['Id'];
+                    storage.storageType = row['StorageType_Name'];
+                    storage.timeAdded = row['datetime_added'];
+                    storage.notes = row['notes'];
+                    storage.rentPrice = row['rent_price'];
+                    storage.reporterName = row['reporter_name'];
+                    storage.size = row['size'];
+
+                    storage.features = await getFeatures(tx, storage.id);
+
+                    storageList.push(storage);
+                }
+
+                return storageList;
+            }
+
+            async function getFeatures(tx, id) {
+                return new Promise(resolve => {
+                    let features = [];
+                    tx.executeSql(
+                        `SELECT StorageFeatures_Name FROM ${Table.Storage_StorageFeatures} WHERE Storage_Id = ?`,
+                        [id],
+                        (tx, rs) => {
+                            for (let row of rs.rows) {
+                                features.push(row['StorageFeatures_Name'])
+                            }
+                            resolve(features);
+                        }
+                    )
+                })
+            }
+
+        });
     },
 
     fillData: function (db) {

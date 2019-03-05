@@ -1,13 +1,24 @@
+const formDataTemplate = {
+    storageType: null,
+    size: null,
+    timeAdded: null,
+    features: [],
+    rentPrice: null,
+    notes: null,
+    reporterName: null
+};
+Object.freeze(formDataTemplate);
+
 const formController = {
     form: null,
-    
-    initialize: function(){
+
+    initialize: function () {
         this.form = $('#form');
-        
-        this.form.submit(e => {
+
+        this.form.submit(async e => {
             e.preventDefault();
 
-            let formData = formController.getNewFormObject();
+            let formData = Object.assign({}, formDataTemplate);
             let rawData = formController.form.serializeArray();
 
             rawData.forEach(entry => {
@@ -18,21 +29,9 @@ const formController = {
                 }
             });
 
-            dbmanager.saveFormData(formData);
+            await dbmanager.saveFormData(formData);
+
+            $.mobile.back();
         });
-    },
-    
-    getNewFormObject: function () {
-        const formDataTemplate = {
-            storageType: null,
-            size: null,
-            timeAdded: null,
-            features: [],
-            rentPrice: null,
-            notes: null,
-            reporterName: null
-        };
-        
-        return Object.assign({}, formDataTemplate);
-    } 
+    }
 };
