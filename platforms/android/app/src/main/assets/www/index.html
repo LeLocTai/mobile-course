@@ -11,10 +11,12 @@
         * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
             * Enable inline JS: add 'unsafe-inline' to default-src
     -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self' 'unsafe-inline' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 
     <link rel="stylesheet" href="css/lib/jquery.mobile-1.4.5.min.css">
     <!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
@@ -24,21 +26,33 @@
     <script type="text/javascript" src="js/lib/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="js/lib/jquery-migrate-3.0.1.min.js"></script>
     <script type="text/javascript" src="js/dbmanager.js"></script>
+    <script type="text/javascript" src="js/data-entry.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/lib/jquery.mobile-1.4.5.min.js"></script>
     <title>MyStorage</title>
 </head>
 
 <body>
-    <section data-role="page">
-        <header data-role="header">
-            <h1>MyStorage</h1>
-        </header>
-        <article data-role="content">
-            <a href="data-entry.html" data-role="button">Data Entry</a>
-            <a href="notification.html" data-role="button">Notification</a>
-        </article>
-    </section>
+<section data-role="page">
+    <header data-role="header">
+        <h1>MyStorage</h1>
+    </header>
+    <article data-role="content">
+        <a href="data-entry.html" data-role="button" id="add-btn">+ New Storage</a>
+        <ul data-role="listview" data-filter="true" id="storage-list"><li>
+            <a href="data-entry.html">
+                <p><small>${id}</small></p>
+                <h3>${type}</h3>
+                <p>${size} m²</p>
+                <p>${note}</p>
+                <section class="ui-li-aside">
+                    <p><strong>$${price}/month</strong></p>
+                    <p>by ${reporterName}</p>
+                </section>
+            </a>
+        </li></ul>
+    </article>
+</section>
 </body>
 
 </html>
