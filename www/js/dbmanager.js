@@ -55,6 +55,12 @@ const dbmanager = {
             })
         }
     },
+    
+    getAllStorage: function(){
+        this.db.transaction(tx => {
+            
+        }, console.error)
+    },
 
     fillData: function (db) {
         db.transaction(tx => {
@@ -64,7 +70,7 @@ const dbmanager = {
                                      ('${StorageFeature.SharingSpace}'),
                                      ('${StorageFeature.CCTV}')`);
         }, error => {
-            if (error.code !== 6)
+            if (error.code !== 6) //Constraint fail, probably due to repetition
                 console.error(error)
         })
     },

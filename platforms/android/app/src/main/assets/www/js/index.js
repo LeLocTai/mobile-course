@@ -14,6 +14,10 @@ const app = {
             app.mainPage = $('#main-page');
             app.storageListView = $('#storage-list');
         });
+
+        $(document).on("pagecreate", "#form-page", function () {
+            formController.initialize();
+        });
         
         $(document).on("pagecontainerbeforeshow", function (event, ui) {
             if (ui.toPage[0].id === app.mainPage[0].id) 
@@ -46,12 +50,15 @@ const app = {
 <li>
     <a href="data-entry.html">
         <p><small>${id}</small></p>
-        <h2>$${price}/month</h2>
-        <h2>${size} m²</h2>        
+        
+        <div><h2>${price}</h2> <small>$/month</small></div>
+        <h2>${size}</h2> <small>m²</small>
+             
         ${note ? `<p>${note}</p>` : ''}
+        
         <section class="ui-li-aside">
             <h2>${type}</h2>
-            <p>by ${reporterName}</p>
+            <p><small>by</small> ${reporterName}</p>
         </section>
     </a>
 </li>

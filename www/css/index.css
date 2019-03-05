@@ -12,6 +12,13 @@ body {
     /* prevent copy paste, to allow, change 'none' to 'text' */
 }
 
+#storage-list h2 {
+    display: inline;
+}
+#storage-list h2 {
+    display: inline;
+}
+
 @keyframes slideinfromleft {
     from {
         transform: translateX(-50%);
