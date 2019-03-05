@@ -14,6 +14,7 @@ const form = $('#form');
 
 form.submit(e => {
     e.preventDefault();
+    
     let formData = Object.assign({}, formDataTemplate);
     let rawData = form.serializeArray();
 

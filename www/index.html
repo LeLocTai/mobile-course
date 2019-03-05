@@ -33,24 +33,13 @@
 </head>
 
 <body>
-<section data-role="page">
+<section data-role="page" id="main-page">
     <header data-role="header">
         <h1>MyStorage</h1>
     </header>
     <article data-role="content">
         <a href="data-entry.html" data-role="button" id="add-btn">+ New Storage</a>
-        <ul data-role="listview" data-filter="true" id="storage-list"><li>
-            <a href="data-entry.html">
-                <p><small>${id}</small></p>
-                <h3>${type}</h3>
-                <p>${size} m²</p>
-                <p>${note}</p>
-                <section class="ui-li-aside">
-                    <p><strong>$${price}/month</strong></p>
-                    <p>by ${reporterName}</p>
-                </section>
-            </a>
-        </li></ul>
+        <ul data-role="listview" data-filter="true" id="storage-list"></ul>
     </article>
 </section>
 </body>
