@@ -22,8 +22,8 @@ const formController = {
     async onSubmit(e) {
         e.preventDefault();
 
-        let formData = Object.assign({}, formDataTemplate);
-        let rawData = this.form.serializeArray();
+        let formData = $.extend(true, {}, formDataTemplate);
+        let rawData = formController.form.serializeArray();
 
         rawData.forEach(entry => {
             if (entry.value === 'on' && StorageFeature.hasOwnProperty(entry.name)) {
@@ -32,7 +32,9 @@ const formController = {
                 formData[entry.name] = entry.value;
             }
         });
-
+        
+        formData.id = e.data.id;
+            
         await dbmanager.saveFormData(formData);
 
         $.mobile.back();
@@ -41,16 +43,15 @@ const formController = {
     async start(formData) {
         $(document).on("pagecreate", "#form-page", () => {
             formController.form = $('#form');
-            formController.form.submit(formController.onSubmit);
+            formController.form.submit(formData, formController.onSubmit);
 
-            console.log(formData);
-            formController.fillForm(formData);
+            formController.fillFormWith(formData);
         });
 
         $.mobile.navigate('data-entry.html');
     },
 
-    fillForm(formData) {
+    fillFormWith(formData) {
         for (let key in formData) {
             if (key === 'features') {
                 formData.features.forEach(feature => {

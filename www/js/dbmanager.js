@@ -21,26 +21,37 @@ const dbmanager = {
     },
 
     async saveFormData(formData) {
+        let isUpdate = !!formData.id;
+        
         return new Promise(resolve => {
-            console.log(formData);
             this.db.transaction(async tx => {
                 await saveStorageFields(tx);
+                console.log('Form Saved: ', formData);
                 resolve();
             }, console.error);
         });
 
         async function saveStorageFields(tx) {
-            return new Promise(resolve => {
+            return new Promise(resolve => {                
+                let idCol = isUpdate ?
+                    ['Id,', '?,'] :
+                    ['', ''];
+
+                let data = [
+                    formData.id,
+                    formData.storageType,
+                    formData.size,
+                    formData.timeAdded,
+                    formData.rentPrice,
+                    formData.notes,
+                    formData.reporterName
+                ];
+                if (!isUpdate) data = data.splice(1);
+
                 tx.executeSql(
-                    `INSERT OR REPLACE INTO ${Table.Storages} (StorageType_Name, "size", datetime_added, rent_price, notes, reporter_name) VALUES (?, ?, ?, ?, ?, ?)`
-                    , [
-                        formData.storageType,
-                        formData.size,
-                        formData.timeAdded,
-                        formData.rentPrice,
-                        formData.notes,
-                        formData.reporterName
-                    ], async (tx, rs) => {
+                    `INSERT OR REPLACE INTO ${Table.Storages} (${idCol[0]} StorageType_Name, "size", datetime_added, rent_price, notes, reporter_name) VALUES (${idCol[1]} ?, ?, ?, ?, ?, ?)`,
+                    data,
+                    async (tx, rs) => {
                         await saveFeatures(tx, rs.insertId);
                         resolve();
                     }
@@ -53,15 +64,26 @@ const dbmanager = {
 
             formData.features.forEach(featureName => {
                 let promise = new Promise(resolve => {
-                    tx.executeSql(
-                        `INSERT INTO ${Table.Storage_StorageFeatures} (Storage_Id, StorageFeatures_Name) VALUES (?, ?)`
-                        , [
-                            storageId,
-                            featureName
-                        ], (tx, rs) => {
-                            resolve();
-                        }
-                    );
+                    function insertFeature(featureName) {
+                        tx.executeSql(
+                            `INSERT INTO ${Table.Storage_StorageFeatures} (Storage_Id, StorageFeatures_Name) VALUES (?, ?)`
+                            , [
+                                storageId,
+                                featureName
+                            ], (tx, rs) => {
+                                resolve();
+                            }
+                        );
+                    }
+                    
+                    if (isUpdate) 
+                        tx.executeSql(
+                            `DELETE FROM ${Table.Storage_StorageFeatures} WHERE Storage_Id = ?`,
+                            [formData.id],
+                            tx => insertFeature(featureName)
+                        );
+                    else
+                        insertFeature(featureName);
                 });
                 promises.push(promise);
             });
@@ -84,7 +106,7 @@ const dbmanager = {
                 let storageList = [];
 
                 for (let row of rs.rows) {
-                    let storage = Object.assign({}, formDataTemplate);
+                    let storage = $.extend(true, {}, formDataTemplate);
 
                     storage.id = row['Id'];
                     storage.storageType = row['StorageType_Name'];
