@@ -115,3 +115,11 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
+### ApacheCordova ###
+# Apache Cordova generated files and directories
+bin/*
+!/plugins
+!/plugins/android.json
+!/plugins/fetch.json
+plugins/*
+platforms/*
