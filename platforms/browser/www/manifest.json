@@ -1,9 +1,0 @@
-{
-  "background_color": "#FFF",
-  "display": "standalone",
-  "name": "MyStorage",
-  "short_name": "MyStorage",
-  "version": "com.leloctai.mystorage",
-  "icons": [],
-  "start_url": "index.html"
-}

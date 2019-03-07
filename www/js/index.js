@@ -2,43 +2,38 @@ const app = {
     mainPage: null,
     storageListView: null,
     // Application Constructor
-    initialize: function () {
+    initialize() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
 
-        $(document).on("mobileinit", function () {
+        $(document).on("mobileinit", () => {
             $.mobile.defaultPageTransition = "slide";
             $.mobile.phonegapNavigationEnabled = true;
         });
 
-        $(document).on("pagecreate", "#main-page", function () {
+        $(document).on("pagecreate", "#main-page", () => {
             app.mainPage = $('#main-page');
             app.storageListView = $('#storage-list');
         });
 
-        $(document).on("pagecreate", "#form-page", function () {
-            formController.initialize();
-        });
-
-        $(document).on("pagecontainerbeforeshow", function (event, ui) {
+        $(document).on("pagecontainerbeforeshow", (event, ui) => {
             if (ui.toPage[0].id === app.mainPage[0].id)
                 app.updateStorageList();
         });
     },
 
-    onDeviceReady: function () {
+    onDeviceReady() {
         dbmanager.initialize();
         app.updateStorageList();
+        formController.initialize();
     },
 
-    updateStorageList: async function () {
+    async updateStorageList() {
         this.storageListView.empty();
 
         let storageList = await dbmanager.getAllStorages();
 
         for (let storage of storageList) {
-            let listItem = $(this.getStorageListItem(
-                storage
-            ));
+            let listItem = $(this.getStorageListItem(storage));
             this.storageListView.append(listItem);
         }
 
@@ -46,10 +41,10 @@ const app = {
         console.log('List updated');
     },
 
-    getStorageListItem: function (storage) {
-        return `
+    getStorageListItem(storage) {
+        let item = $(`
 <li>
-    <a href="data-entry.html">
+    <a href="">
         <h2>${storage.storageType} Storage</h2>
         <div><h2>${storage.rentPrice}</h2> <small>$/month</small></div>
         <h2>${storage.size}</h2> <small>m²</small>
@@ -62,7 +57,12 @@ const app = {
         </section>
     </a>
 </li>
-`;
+`);
+        // item.data(storage);
+        item.click(e => {
+            formController.start(storage);
+        });
+        return item;
     }
 };
 

@@ -14,13 +14,13 @@ const StorageFeature = {
 const dbmanager = {
     db: null,
 
-    initialize: function () {
+    initialize() {
         this.db = this.openDb();
         this.prepareTables(this.db);
         this.fillData(this.db);
     },
 
-    saveFormData: async function (formData) {
+    async saveFormData(formData) {
         return new Promise(resolve => {
             console.log(formData);
             this.db.transaction(async tx => {
@@ -32,7 +32,7 @@ const dbmanager = {
         async function saveStorageFields(tx) {
             return new Promise(resolve => {
                 tx.executeSql(
-                    `INSERT INTO ${Table.Storages} (StorageType_Name, "size", datetime_added, rent_price, notes, reporter_name) VALUES (?, ?, ?, ?, ?, ?)`
+                    `INSERT OR REPLACE INTO ${Table.Storages} (StorageType_Name, "size", datetime_added, rent_price, notes, reporter_name) VALUES (?, ?, ?, ?, ?, ?)`
                     , [
                         formData.storageType,
                         formData.size,
@@ -50,7 +50,7 @@ const dbmanager = {
 
         async function saveFeatures(tx, storageId) {
             let promises = [];
-            
+
             formData.features.forEach(featureName => {
                 let promise = new Promise(resolve => {
                     tx.executeSql(
@@ -65,12 +65,12 @@ const dbmanager = {
                 });
                 promises.push(promise);
             });
-            
+
             return Promise.all(promises);
         }
     },
 
-    getAllStorages: async function () {
+    async getAllStorages() {
         return new Promise(resolve => {
 
             dbmanager.db.transaction(
@@ -121,7 +121,7 @@ const dbmanager = {
         });
     },
 
-    fillData: function (db) {
+    fillData(db) {
         db.transaction(tx => {
             tx.executeSql(`INSERT into ${Table.StorageTypes} values ('Home'),('Business')`);
             tx.executeSql(`INSERT into ${Table.StorageFeatures} values 
@@ -134,7 +134,7 @@ const dbmanager = {
         })
     },
 
-    openDb: function () {
+    openDb() {
         return window.openDatabase(
             "mystoragedb",
             "1.0",
@@ -143,7 +143,7 @@ const dbmanager = {
         );
     },
 
-    prepareTables: function (db) {
+    prepareTables(db) {
         db.transaction(createTables, console.error);
 
         function createTables(tx) {
