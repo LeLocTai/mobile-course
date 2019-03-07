@@ -46,8 +46,8 @@ const app = {
 <li>
     <a href="">
         <h2>${storage.storageType} Storage</h2>
-        <div><h2>${storage.rentPrice}</h2> <small>$/month</small></div>
-        <h2>${storage.size}</h2> <small>m²</small>
+        <div><h2>${storage.rentPrice}</h2><small>$/month</small></div>
+        <h2>${storage.size}</h2><small>m²</small>
              
         ${storage.notes ? `<p>${storage.notes}</p>` : ''}
         
