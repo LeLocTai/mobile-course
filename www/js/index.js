@@ -14,6 +14,13 @@ const app = {
         $(document).on("pagecreate", "#main-page", () => {
             app.mainPage = $('#main-page');
             app.storageListView = $('#storage-list');
+            
+            $('#add-btn').click(e => {
+                e.preventDefault();
+                formController.start({});
+            });
+
+            $('.filter-slider').on('slidestop',e => app.onFilter(e));
         });
 
         $(document).on("pagecontainerbeforeshow", (event, ui) => {
@@ -28,16 +35,6 @@ const app = {
         this.isDeviceReady = true;
 
         app.updateStorageList();
-
-
-        $('#add-btn').click(e => {
-            e.preventDefault();
-            formController.start({});
-        });
-
-        let sliders = $('.filter-slider');
-        // sliders.slider();
-        sliders.on('input',e => app.onFilter);
     },
 
     onFilter(e) {
