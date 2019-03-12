@@ -26,20 +26,39 @@ const app = {
         dbmanager.initialize();
         formController.initialize();
         this.isDeviceReady = true;
-        
+
         app.updateStorageList();
-        
-        
+
+
         $('#add-btn').click(e => {
             e.preventDefault();
             formController.start({});
-        })
-        
-        $('.filter-slider').change(e => app.onFilter())
+        });
+
+        let sliders = $('.filter-slider');
+        // sliders.slider();
+        sliders.on('input',e => app.onFilter);
     },
-    
-    onFilter(){
-        
+
+    onFilter(e) {
+        let items = this.storageListView.children('.list-item');
+
+        let priceMin = $('#price-range-min').val();
+        let priceMax = $('#price-range-max').val();
+        let sizeMin = $('#size-range-min').val();
+        let sizeMax = $('#size-range-max').val();
+
+        for (let i of items) {
+            let item = $(i);
+            let itemData = item.data();
+            if (itemData.rentPrice >= priceMin &&
+                itemData.rentPrice <= priceMax &&
+                itemData.size >= sizeMin &&
+                itemData.size <= sizeMax)
+                item.show();
+            else
+                item.hide();
+        }
     },
 
     async updateStorageList() {

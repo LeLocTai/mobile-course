@@ -12,9 +12,14 @@ body {
     /* prevent copy paste, to allow, change 'none' to 'text' */
 }
 
+.filter-slider, .ui-slider-handle, .ui-slider-bg, .ui-slider-track {
+    touch-action: none;
+}
+
 #storage-list h2 {
     display: inline;
 }
+
 #storage-list h2 {
     display: inline;
 }
