@@ -1,6 +1,7 @@
 const app = {
     mainPage: null,
     storageListView: null,
+    isDeviceReady: false,
     // Application Constructor
     initialize() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
@@ -16,15 +17,17 @@ const app = {
         });
 
         $(document).on("pagecontainerbeforeshow", (event, ui) => {
-            if (ui.toPage[0].id === app.mainPage[0].id)
+            if (app.isDeviceReady && ui.toPage[0].id === app.mainPage[0].id)
                 app.updateStorageList();
         });
     },
 
     onDeviceReady() {
         dbmanager.initialize();
-        app.updateStorageList();
         formController.initialize();
+        this.isDeviceReady = true;
+        
+        app.updateStorageList();
     },
 
     async updateStorageList() {
