@@ -28,6 +28,18 @@ const app = {
         this.isDeviceReady = true;
         
         app.updateStorageList();
+        
+        
+        $('#add-btn').click(e => {
+            e.preventDefault();
+            formController.start({});
+        })
+        
+        $('.filter-slider').change(e => app.onFilter())
+    },
+    
+    onFilter(){
+        
     },
 
     async updateStorageList() {
@@ -61,7 +73,8 @@ const app = {
     </a>
 </li>
 `);
-        // item.data(storage);
+        item.addClass('list-item');
+        item.data(storage);
         item.click(e => {
             formController.start(storage);
         });

@@ -19,6 +19,33 @@ const formController = {
         });
     },
 
+    async start(formData) {
+        $(document).on("pagecreate", "#form-page", () => {
+            formController.form = $('#form');
+            formController.form.submit(formData, formController.onSubmit);
+
+            formController.fillFormWith(formData);
+
+
+            let isCreate = !formData.id;
+
+
+            let deleteBtn = formController.form.find('#delete-btn');
+            if (isCreate) {
+                deleteBtn.hide();
+            } else {
+                deleteBtn.show();
+                formController.form.find('#delete-btn').click({id: formData.id}, formController.onDelete);
+            }
+
+
+            let title = $('#title');
+            title.text(isCreate ? 'New Storage' : 'Storage ' + formData.id);
+        });
+
+        $.mobile.navigate('data-entry.html');
+    },
+
     async onSubmit(e) {
         e.preventDefault();
 
@@ -32,23 +59,34 @@ const formController = {
                 formData[entry.name] = entry.value;
             }
         });
-        
+
         formData.id = e.data.id;
-            
+
         await dbmanager.saveFormData(formData);
 
         $.mobile.back();
     },
 
-    async start(formData) {
-        $(document).on("pagecreate", "#form-page", () => {
-            formController.form = $('#form');
-            formController.form.submit(formData, formController.onSubmit);
+    async onDelete(e) {
+        e.preventDefault();
 
-            formController.fillFormWith(formData);
-        });
+        navigator.notification.confirm(
+            "Are you sure?",
+            onConfirm,
+            "Confirm Delete",
+            ["Delete, Cancel"]
+        );
 
-        $.mobile.navigate('data-entry.html');
+        async function onConfirm(choice) {
+            switch (choice) {
+                case 1:
+                    await dbmanager.deleteStorage(e.data.id);
+                    $.mobile.back();
+                    break;
+                case 2:
+                    break;
+            }
+        }
     },
 
     fillFormWith(formData) {

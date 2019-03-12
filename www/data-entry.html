@@ -2,8 +2,10 @@
 <html lang="en">
 <body>
 <section data-role="page" data-add-back-btn="true" id="form-page">
+    <link rel="stylesheet" href="css/form.css">
+    
     <div data-role="header" data-position="fixed" data-add-back-btn="true">
-        <h1>Add Storage</h1>
+        <h1 id="title">Add Storage</h1>
     </div>
     <div role="main" class="ui-content">
         <form id="form">
@@ -54,7 +56,8 @@
                 <input type="text" name="reporterName" id="reporterName" value="" required/>
             </div>
 
-            <button class="ui-btn">Save</button>
+            <button type="submit" class="ui-btn">Save</button>
+            <button class="ui-btn" id="delete-btn">Delete</button>
         </form>
     </div>
 </section>
