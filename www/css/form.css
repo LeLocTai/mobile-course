@@ -1,3 +1,11 @@
 #delete-btn{
     color: red;
 }
+
+input[value=""]:valid{
+    box-shadow: inset 0 0 1px 1px lime;
+}
+
+input:focus:invalid{
+    box-shadow: inset 0 0 1px 1px red;
+}
