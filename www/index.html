@@ -38,9 +38,14 @@
         <h1>MyStorage</h1>
     </header>
     <article data-role="content">
-        <a href="data-entry.html" data-role="button" id="add-btn">+ New Storage</a>
-        <div data-role="collapsible" data-mini="true">
-            <h4>Filters</h4>
+        <a href="data-entry.html" data-role="button" id="add-btn"
+           class="ui-btn ui-btn-b ui-icon-plus ui-btn-icon-left ui-corner-all">New Storage</a>
+        <div data-role="collapsible"
+             data-mini="true"
+             data-collapsed-icon="carat-d"
+             data-expanded-icon="carat-u"
+             class="ui-nodisc-icon ui-alt-icon">
+            <h4>Advanced Filters</h4>
             <ul data-role="listview">
                 <li>
                     <div data-role="rangeslider">

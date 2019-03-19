@@ -16,6 +16,10 @@ body {
     touch-action: none;
 }
 
+#add-btn{
+    text-align: left;
+}
+
 #storage-list h2 {
     display: inline;
 }
