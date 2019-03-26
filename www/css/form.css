@@ -1,11 +1,15 @@
-#delete-btn{
+#delete-btn {
     color: red;
 }
 
-select:valid, textarea:valid, input:valid {
-    box-shadow: inset 0 0 1px 1px limegreen;
+input:focus:valid {
+    box-shadow: inset 0 0 1px 1px lime;
 }
 
-select:invalid, textarea:invalid, input:invalid {
+input:focus:invalid {
     box-shadow: inset 0 0 1px 1px red;
+}
+
+.ui-btn {
+    text-align: left;
 }
