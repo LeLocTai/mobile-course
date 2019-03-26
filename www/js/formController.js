@@ -74,7 +74,7 @@ const formController = {
             "Are you sure?",
             onConfirm,
             "Confirm Delete",
-            ["Delete, Cancel"]
+            ["Delete", "Cancel"]
         );
 
         async function onConfirm(choice) {
